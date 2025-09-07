@@ -42,7 +42,7 @@ ENV USER=root
 ENV PATH=${HADOOP_HOME}/bin/:$PATH
 
 # Copy scripts
-ADD base/entrypoint.sh /entrypoint.sh
+ADD ./base/entrypoint.sh /entrypoint.sh
 RUN chmod a+x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
