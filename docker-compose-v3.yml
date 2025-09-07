@@ -1,0 +1,126 @@
+version: '3'
+
+services:
+  namenode:
+    build:
+      context: .
+      dockerfile: base/Dockerfile
+    networks:
+      - hbase
+    volumes:
+      - namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - ./hadoop.env
+    command: ["hdfs", "namenode"]
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.hostname == akswnc4.aksw.uni-leipzig.de
+      labels:
+        traefik.docker.network: hbase
+        traefik.port: 9870   # UI của NameNode (Hadoop 3.x dùng 9870)
+
+  datanode:
+    build:
+      context: .
+      dockerfile: base/Dockerfile
+    networks:
+      - hbase
+    volumes:
+      - datanode:/hadoop/dfs/data
+    env_file:
+      - ./hadoop.env
+    depends_on:
+      - namenode
+    command: ["hdfs", "datanode"]
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+      labels:
+        traefik.docker.network: hbase
+        traefik.port: 9864   # UI DataNode
+
+  resourcemanager:
+    build:
+      context: .
+      dockerfile: base/Dockerfile
+    networks:
+      - hbase
+    env_file:
+      - ./hadoop.env
+    depends_on:
+      - namenode
+      - datanode
+    command: ["yarn", "resourcemanager"]
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.hostname == akswnc4.aksw.uni-leipzig.de
+      labels:
+        traefik.docker.network: hbase
+        traefik.port: 8088
+    healthcheck:
+      disable: true
+
+  nodemanager:
+    build:
+      context: .
+      dockerfile: base/Dockerfile
+    networks:
+      - hbase
+    env_file:
+      - ./hadoop.env
+    depends_on:
+      - resourcemanager
+    command: ["yarn", "nodemanager"]
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+      labels:
+        traefik.docker.network: hbase
+        traefik.port: 8042
+
+  historyserver:
+    build:
+      context: .
+      dockerfile: base/Dockerfile
+    networks:
+      - hbase
+    volumes:
+      - hadoop_historyserver:/hadoop/yarn/timeline
+    env_file:
+      - ./hadoop.env
+    depends_on:
+      - resourcemanager
+    command: ["mapred", "historyserver"]
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == akswnc4.aksw.uni-leipzig.de
+      labels:
+        traefik.docker.network: hbase
+        traefik.port: 8188
+
+volumes:
+  datanode:
+  namenode:
+  hadoop_historyserver:
+
+networks:
+  hbase:
+    external:
+      name: hbase
