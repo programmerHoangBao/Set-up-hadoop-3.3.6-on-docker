@@ -1,17 +1,17 @@
 FROM debian:11
 LABEL maintainer="Hoang Bao <universitynhb@gmail.com>"
 
-# Install Java 11 and necessary tools
+# Install Java 17 and necessary tools
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
       curl \
       gnupg \
       net-tools \
       netcat-openbsd \
-      openjdk-11-jdk \
+      openjdk-17-jdk \
     && rm -rf /var/lib/apt/lists/*
 
-# Set JAVA_HOME for Java 11
-ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
+# Set JAVA_HOME for Java 17
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/
 
 # Download and import key to verify Hadoop
 RUN curl -O https://dist.apache.org/repos/dist/release/hadoop/common/KEYS
@@ -44,5 +44,4 @@ ENV PATH=${HADOOP_HOME}/bin/:$PATH
 # Copy scripts
 ADD ./base/entrypoint.sh /entrypoint.sh
 RUN chmod a+x /entrypoint.sh
-
 ENTRYPOINT ["/entrypoint.sh"]
