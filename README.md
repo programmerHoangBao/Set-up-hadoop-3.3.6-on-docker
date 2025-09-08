@@ -22,15 +22,23 @@
   <img width="1350" height="767" alt="image" src="https://github.com/user-attachments/assets/0880829d-fe96-4c7d-9895-e22f998bc079" /><br>
 ## **3. Result**
 - Result on doker:<br>
-<img width="2560" height="1528" alt="image" src="https://github.com/user-attachments/assets/2b47be4e-772d-44f5-90f7-fff5883ff4be" /><br>
-- Access the website at http://localhost:9870/dfshealth.html#tab-overview.<br>
-<img width="2560" height="1528" alt="image" src="https://github.com/user-attachments/assets/66e84a06-963a-4520-9478-7589a1aa9c62" /><br>
-- Check namenode.<br>
-  **docker exec -it namenode bash**<br>
-  <img width="1350" height="767" alt="image" src="https://github.com/user-attachments/assets/ef56fab3-7bdb-4c6c-8cc5-59b703be0883" /><br>
-- Check datanode.<br>
-  **docker exec -it datanode bash** <br>
-  <img width="1350" height="767" alt="image" src="https://github.com/user-attachments/assets/f3e9e22c-a3a3-4b4d-a3d3-ece3c228f4ac" /><br>
+   **docker ps** <br>
+<img width="2560" height="1528" alt="image" src="https://github.com/user-attachments/assets/3a2d32ea-b4ae-40dc-8fad-4f38b30ce065" />
+<img width="2560" height="1528" alt="image" src="https://github.com/user-attachments/assets/102e652d-ea51-4be4-94ec-125758f1fbab" />
+**- Check namenode.<br>**
+  http://localhost:9870/dfshealth.html#tab-overview <br>
+  <img width="2560" height="1528" alt="image" src="https://github.com/user-attachments/assets/bdeaf2a8-e265-4938-8432-da5ee2b76b6b" />
+**- Check datanode.<br>**
+   http://localhost:9864/datanode.html <br>
+  <img width="2560" height="1528" alt="image" src="https://github.com/user-attachments/assets/a2b6b00a-e1bc-4307-9e78-d0878ca45aa3" />
+**- Check resourcemanager: <br>**
+   http://localhost:8088/cluster <br>
+   <img width="2560" height="1528" alt="image" src="https://github.com/user-attachments/assets/3f7ba0df-0647-40e4-a3ee-841b5685b7b5" />
+**- Check node:**
+  http://localhost:8042/node <br>
+  <img width="2560" height="1528" alt="image" src="https://github.com/user-attachments/assets/08c4e45c-c721-4fce-9be0-c7f7b8c0dc97" />
+
+
 
 
 
