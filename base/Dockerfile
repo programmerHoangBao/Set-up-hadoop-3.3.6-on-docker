@@ -1,4 +1,4 @@
-FROM debian:11
+FROM ubuntu:22.04
 LABEL maintainer="Hoang Bao <universitynhb@gmail.com>"
 
 # Install Java 17 and necessary tools
