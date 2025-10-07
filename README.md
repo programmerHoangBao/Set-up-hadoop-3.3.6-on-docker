@@ -12,6 +12,9 @@
 - Navigate to the Set-up-hadoop-3.3.6-on-docker directory.<br>
   **cd Set-up-hadoop-3.3.6-on-docker** <br>
   <img width="1350" height="767" alt="image" src="https://github.com/user-attachments/assets/009123b7-426c-46cc-87d2-d670a16f06c7" /><br>
+- Note: The file base/entrypoint.sh must use the Line Feed (LF) line ending format.
+  <img width="1280" height="782" alt="image" src="https://github.com/user-attachments/assets/8d4dd64b-e10f-4175-9e4b-706b69a94ecf" />
+
 - Start all services defined in the docker-compose.yml file and run them in detached mode.<br>
   **docker-compose up -d** <br>
   <img width="1350" height="767" alt="image" src="https://github.com/user-attachments/assets/202e9094-5854-44c3-a644-ac11cd84367e" /><br>
